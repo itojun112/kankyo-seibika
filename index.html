@@ -1,0 +1,436 @@
+<!doctype html
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>環境整備課｜ごみを減らす・ゆずりあう</title>
+  <meta name="description" content="退去時のごみ削減（ぐるぐる）、不用品掲示板（もののわ）、回収・再活用（しゃばりば／まるど）をまとめた案内ページ。">
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111827;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --accent:#22c55e;
+      --accent2:#60a5fa;
+      --border:rgba(148,163,184,.25);
+      --shadow: 0 12px 30px rgba(0,0,0,.25);
+      --radius:18px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Segoe UI", Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(34,197,94,.25), transparent 60%),
+                  radial-gradient(1000px 500px at 100% 0%, rgba(96,165,250,.18), transparent 55%),
+                  var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    header{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,20,.6);
+      border-bottom:1px solid var(--border);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:14px 16px;}
+    .nav{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 200px;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(34,197,94,.15);
+    }
+    .navlinks{
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:14px;
+    }
+    .navlinks a{
+      text-decoration:none;
+      padding:8px 10px;
+      border:1px solid transparent;
+      border-radius:999px;
+      color:rgba(229,231,235,.9);
+    }
+    .navlinks a:hover{border-color:var(--border); background:rgba(17,24,39,.5)}
+    .hero{
+      padding:36px 16px 10px;
+    }
+    .hero .wrap{
+      display:grid; gap:16px;
+      grid-template-columns: 1.3fr .7fr;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .hero .wrap{grid-template-columns: 1fr;}
+      .nav{gap:8px}
+      .brand{min-width:auto}
+    }
+    .card{
+      background: rgba(17,24,39,.72);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    h1{margin:0 0 8px; font-size: clamp(22px, 3vw, 32px); line-height:1.25;}
+    .lead{margin:0; color:rgba(229,231,235,.85)}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .chip{
+      font-size:12px; color:rgba(229,231,235,.9);
+      padding:6px 10px; border:1px solid var(--border); border-radius:999px;
+      background: rgba(11,15,20,.35);
+    }
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(11,15,20,.35);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius: 12px;
+      text-decoration:none;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-weight:600;
+      font-size:14px;
+    }
+    .btn.primary{
+      border-color: rgba(34,197,94,.35);
+      background: linear-gradient(90deg, rgba(34,197,94,.22), rgba(96,165,250,.12));
+    }
+    .btn:hover{transform: translateY(-1px); transition: .15s ease}
+    .muted{color:var(--muted); font-size:13px}
+    section{padding:10px 16px 22px}
+    .grid3{
+      max-width: var(--max); margin:0 auto;
+      display:grid; gap:14px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 980px){ .grid3{grid-template-columns: 1fr;} }
+    h2{margin:0 0 8px; font-size:18px}
+    .kicker{font-weight:700; color:rgba(229,231,235,.95)}
+    .tag{
+      display:inline-block; margin-left:6px;
+      font-size:12px; color:rgba(229,231,235,.9);
+      padding:3px 8px; border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(11,15,20,.35);
+    }
+    ul{margin:10px 0 0; padding-left:18px}
+    li{margin:6px 0}
+    .hr{
+      height:1px; background: var(--border);
+      max-width: var(--max); margin:16px auto 0;
+    }
+    .two{
+      max-width: var(--max); margin:0 auto;
+      display:grid; gap:14px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 980px){ .two{grid-template-columns: 1fr;} }
+    details{
+      border:1px solid var(--border);
+      border-radius: 14px;
+      padding:12px 12px;
+      background: rgba(17,24,39,.55);
+    }
+    details + details{margin-top:10px}
+    summary{
+      cursor:pointer;
+      font-weight:700;
+      outline:none;
+    }
+    footer{
+      padding:22px 16px 40px;
+      border-top:1px solid var(--border);
+      background: rgba(11,15,20,.55);
+    }
+    .small{font-size:12px; color:rgba(148,163,184,.95)}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(17,24,39,.45);
+      font-size:13px;
+    }
+    .notice{
+      border:1px dashed rgba(148,163,184,.35);
+      background: rgba(11,15,20,.28);
+      padding:12px;
+      border-radius: 14px;
+    }
+    .copyRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px}
+    .input{
+      flex: 1;
+      min-width: 220px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: rgba(11,15,20,.35);
+      color: var(--text);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot" aria-hidden="true"></span>
+          <span>環境整備課</span>
+          <span class="tag">ごみを減らす・ゆずりあう</span>
+        </div>
+        <nav class="navlinks" aria-label="ページ内リンク">
+          <a href="#about">概要</a>
+          <a href="#projects">活動</a>
+          <a href="#faq">よくある質問</a>
+          <a href="#contact">連絡</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="card">
+          <h1>捨てる前に、ひと呼吸。<br/>「使える」を循環させよう。</h1>
+          <p class="lead">
+            退去時のごみ削減（<b>ぐるぐる</b>）、不用品掲示板（<b>もののわ</b>）、
+            回収・再活用（<b>しゃばりば／まるど</b>）をまとめた案内ページです。
+          </p>
+          <div class="chips" aria-label="活動キーワード">
+            <span class="chip">ぐるぐる：退去時に残す</span>
+            <span class="chip">もののわ：欲しい人へ</span>
+            <span class="chip">回収：分別・整理</span>
+            <span class="chip">再活用：地域で循環</span>
+          </div>
+          <div class="ctaRow">
+            <a class="btn primary" href="#howto">参加する（手順を見る）</a>
+            <a class="btn" href="#projects">活動の詳細</a>
+          </div>
+          <p class="muted" style="margin-top:12px;">
+            
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="kicker">お知らせ</div>
+          <p class="muted" style="margin:8px 0 0;">
+            回収や出店（しゃばりば／まるど）の最新情報は、下の連絡先・掲示板で案内します。
+          </p>
+
+          <div class="notice" style="margin-top:12px;">
+            <div class="pill">📌 直近の動き</div>
+            <ul>
+              <li>しゃばりば：常設を優先して準備（在庫と質が基準以上なら出店も検討）</li>
+              <li>ぐるぐる：残すものリスト作成・周知</li>
+              <li>もののわ：掲示板の周知・投稿促進</li>
+            </ul>
+            <p class="small" style="margin:10px 0 0;">
+            
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="wrap card">
+        <h2>この取り組みの目的</h2>
+        <ul>
+          <li>退去・引っ越し時に出やすい「まとめゴミ」を減らす</li>
+          <li>まだ使える物を捨てずに、必要な人へつなぐ</li>
+          <li>回収・整理を仕組みにして、地域や住まいの負担を軽くする</li>
+        </ul>
+        <p class="muted">合言葉：<b>捨てる前に、ゆずる／残す／回す</b></p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="grid3">
+        <div class="card">
+          <h2>ぐるぐる <span class="tag">退去時のごみ削減</span></h2>
+          <p class="muted">
+            退去する人が「捨てる」代わりに、使える物を所定の場所に残す仕組み。
+            次の人が使えれば、ごみも出費も減る。
+          </p>
+          <ul>
+            <li>「残すものリスト」を見てOK品を確認</li>
+            <li>汚れ・破損があるものは無理に残さない</li>
+            <li>衛生面が大事なもの（肌着等）は原則NG</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>もののわ <span class="tag">不用品掲示板</span></h2>
+          <p class="muted">
+            「要らない」ではなく「ゆずります／ほしいです」でつながる掲示板。
+            捨てる前に一度投稿してみよう。
+          </p>
+          <ul>
+            <li>写真＋状態＋受け渡し方法を書く</li>
+            <li>取引は基本「先着」か「相談」</li>
+            <li>個人情報は出しすぎない（場所はぼかす等）</li>
+          </ul>
+          <div class="copyRow">
+            <input class="input" id="mononowaUrl" value="https://www.facebook.com/groups/2583108038756786/" readonly />
+            <button class="btn" type="button" onclick="copyText('mononowaUrl')">コピー</button>
+          </div>
+          
+        </div>
+
+        <div class="card">
+          <h2>しゃばりば／まるど <span class="tag">回収・再活用</span></h2>
+          <p class="muted">
+            回収して整理し、必要な人に渡したり、地域イベントで活用したりする動き。
+            物の数・質に応じて「常設」か「出店」を判断。
+          </p>
+          <ul>
+            <li>回収対象：壊れていない／清潔にできるもの</li>
+            <li>NG：破損、強い汚れ、衛生リスクが高いもの</li>
+            <li>判断が迷う物は写真付きで相談</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="two" style="margin-top:14px;">
+        <div class="card">
+          <h2>現在回収できるもの</h2>
+<ul>
+  <li>衣類（洗濯済み・状態が良いもの）</li>
+  <li>小物（アクセサリー・帽子・バッグなど）</li>
+  <li>書籍（破れや強い汚れがないもの）</li>
+</ul>
+<p class="small">
+※現在は上記の品目に限定して回収しています。
+</p>
+          <p class="small"></p>
+        </div>
+
+        <div class="card">
+          <h2>お願い（トラブル防止）</h2>
+          <ul>
+            <li>「誰かが掃除する前提」で放置しない</li>
+            <li>受け渡しは期限を決める（例：◯日まで）</li>
+          </ul>
+          <p class="muted">運用が回るほど、みんなの負担が軽くなります。</p>
+        </div>
+      </div>
+    </section>
+
+    
+<div class="notice" style="margin-top:14px;">
+  <h3>📷 写真で相談（おすすめ）</h3>
+  <p class="muted">
+    「回収できるか微妙」な物は、写真を送って確認するのがいちばん早いです。
+  </p>
+</div>
+
+    <section id="faq">
+      <div class="wrap">
+        <h2 style="margin:0 0 10px;">よくある質問</h2>
+
+        <details>
+          <summary>Q. 何でも回収できますか？</summary>
+          <p class="muted">
+            A. 破損がなく、清掃できて、次の人が安全に使えるものが基本です。
+            衛生リスクが高いものや強い汚れが落ちないものは対象外にします。
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. ぐるぐるに「残していい物」の基準は？</summary>
+          <p class="muted">
+            A. 「残してもよいものリスト」にあるものが基本です。迷ったら写真で相談してください。
+            ルールを少しずつ整備していく想定です。
+          </p>
+        </details>
+
+        <details>
+          <summary>Q. もののわでの受け渡しが不安です</summary>
+          <p class="muted">
+            A. 個人情報を出しすぎず、受け渡し場所は公共性の高い場所・時間帯にするのがおすすめです。
+            期限（◯日まで）を決めると放置が減ります。
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap card">
+        <h2>連絡・リンク</h2>
+        <p class="muted">ここに「担当（環境整備課）」「問い合わせ方法」「フォーム」を置きます。</p>
+
+        <div class="two" style="margin-top:10px;">
+          <div class="card" style="box-shadow:none; background: rgba(11,15,20,.2);">
+            <div class="kicker">問い合わせ（例）</div>
+            <ul>
+              <li>担当：環境整備課（名前）</li>
+              <li>連絡：チャット／掲示板／フォーム</li>
+              <li>対応時間：—</li>
+            </ul>
+          </div>
+
+          <div class="card" style="box-shadow:none; background: rgba(11,15,20,.2);">
+            <div class="kicker">フォーム</div>
+            <p class="muted" style="margin:8px 0 0;">
+              二次回収Googleフォーム
+            </p>
+            <div class="copyRow">
+              <input class="input" id="formUrl" value="（ここにフォームURLを入れる）" readonly />
+              <button class="btn" type="button" onclick="copyText('formUrl')">コピー</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="small" style="margin-top:12px;">
+          ※運用が固まったら「回収日カレンダー」「OK/NGリストPDF」などもここに追加できます。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="pill">♻️ 環境整備課</div>
+      <p class="small" style="margin:10px 0 0;">
+        このページは案内用の簡易サイトです。文言やルールは運用に合わせて更新します。
+      </p>
+      <p class="small" style="margin:6px 0 0;">
+        © <span id="year"></span> 環境整備課
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function copyText(id){
+      const el = document.getElementById(id);
+      el.select();
+      el.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(el.value).then(()=>{
+        const old = el.value;
+        el.value = "コピーしました！";
+        setTimeout(()=>{ el.value = old; }, 900);
+      }).catch(()=>{
+        alert("コピーに失敗しました。手動で選択してコピーしてください。");
+      });
+    }
+  </script>
+</body>
+</html>
+17:07 2026/01/28

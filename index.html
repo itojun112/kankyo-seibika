@@ -1,13 +1,12 @@
-<!doctype html
+<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<meta name="robots" content="noindex, nofollow">
-
+  <meta name="robots" content="noindex, nofollow">
   <title>環境整備課｜ごみを減らす・ゆずりあう</title>
   <meta name="description" content="退去時のごみ削減（ぐるぐる）、不用品掲示板（もののわ）、回収・再活用（しゃばりば／まるど）をまとめた案内ページ。">
+
   <style>
     :root{
       --bg:#0b0f14;
@@ -22,6 +21,7 @@
       --max: 980px;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Segoe UI", Arial, sans-serif;
@@ -105,6 +105,7 @@
       align-items:center;
       font-weight:600;
       font-size:14px;
+      cursor:pointer;
     }
     .btn.primary{
       border-color: rgba(34,197,94,.35);
@@ -116,10 +117,16 @@
     .grid3{
       max-width: var(--max); margin:0 auto;
       display:grid; gap:14px;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
+     /* ぐるぐるだけ横いっぱいにする */
+     .grid3 .spanAll{
+     grid-column: 1 / -1;
+    }
+
     @media (max-width: 980px){ .grid3{grid-template-columns: 1fr;} }
     h2{margin:0 0 8px; font-size:18px}
+    h3{margin:0 0 8px; font-size:16px}
     .kicker{font-weight:700; color:rgba(229,231,235,.95)}
     .tag{
       display:inline-block; margin-left:6px;
@@ -181,6 +188,56 @@
       background: rgba(11,15,20,.35);
       color: var(--text);
     }
+
+    /* ぐるぐるリスト内の小見出し */
+    .subhead{margin-top:10px; font-weight:700; color:rgba(229,231,235,.95)}
+/* ==== ぐるぐる：残していいものリスト 見やすさ強化 ==== */
+.keepWrap{margin-top:10px}
+.keepLead{color:var(--muted); font-size:13px; margin:6px 0 0}
+.keepRule{
+  border:1px dashed rgba(148,163,184,.35);
+  background: rgba(11,15,20,.28);
+  padding:12px;
+  border-radius:14px;
+}
+.keepBadges{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 0}
+.keepBadge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 10px; border-radius:999px;
+  border:1px solid var(--border);
+  background: rgba(17,24,39,.45);
+  font-size:12px;
+}
+.keepSection{margin-top:10px}
+.keepSection summary{
+  padding:10px 10px;
+  border-radius:12px;
+  background: rgba(17,24,39,.35);
+}
+.keepGrid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+@media (min-width: 860px){
+  .keepGrid{grid-template-columns: 1fr 1fr;}
+}
+.keepBox{
+  border:1px solid var(--border);
+  background: rgba(17,24,39,.35);
+  border-radius:14px;
+  padding:12px;
+}
+.keepBox h4{
+  margin:0 0 6px;
+  font-size:14px;
+  letter-spacing:.02em;
+}
+.keepBox ul{margin:6px 0 0; padding-left:18px}
+.keepBox li{margin:5px 0}
+.keepHr{height:1px; background: var(--border); margin:10px 0}
+.keepNote{font-size:12px; color:rgba(148,163,184,.95); margin-top:10px}
   </style>
 </head>
 
@@ -204,6 +261,7 @@
   </header>
 
   <main>
+    <!-- HERO -->
     <div class="hero">
       <div class="wrap">
         <div class="card">
@@ -219,12 +277,9 @@
             <span class="chip">再活用：地域で循環</span>
           </div>
           <div class="ctaRow">
-            <a class="btn primary" href="#howto">参加する（手順を見る）</a>
             <a class="btn" href="#projects">活動の詳細</a>
           </div>
-          <p class="muted" style="margin-top:12px;">
-            
-          </p>
+          <p class="muted" style="margin-top:12px;"></p>
         </div>
 
         <div class="card">
@@ -240,14 +295,13 @@
               <li>ぐるぐる：残していいものリスト作成・周知</li>
               <li>もののわ：掲示板の周知・投稿促進</li>
             </ul>
-            <p class="small" style="margin:10px 0 0;">
-            
-            </p>
+            <p class="small" style="margin:10px 0 0;"></p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABOUT -->
     <section id="about">
       <div class="wrap card">
         <h2>この取り組みの目的</h2>
@@ -259,10 +313,21 @@
         <p class="muted">合言葉：<b>捨てる前に、ゆずる／残す／回す</b></p>
       </div>
     </section>
+    
+<section id="howto">
+  <div class="wrap card">
+    <div class="notice" style="margin-top:14px;">
+      <h3>📷 写真で相談（おすすめ）</h3>
+      <p class="muted">「回収できるか微妙」な物は、写真を送って確認するのがいちばん早いです。</p>
+    </div>
+  </div>
+</section>
 
+    <!-- PROJECTS -->
     <section id="projects">
       <div class="grid3">
-        <div class="card">
+        <!-- ぐるぐる -->
+        <div class="card spanAll">
           <h2>ぐるぐる <span class="tag">退去時のごみ削減</span></h2>
           <p class="muted">
             退去する人が「捨てる」代わりに、使える物を所定の場所に残す仕組み。
@@ -273,8 +338,147 @@
             <li>汚れ・破損があるものは無理に残さない</li>
             <li>衛生面が大事なもの（肌着等）は原則NG</li>
           </ul>
+
+          <!-- ★ ここが埋め込み：残していいものリスト -->
+          <details id="guruguru-keep-list" class="keepSection" style="margin-top:12px;">
+  <summary>残していいものリスト</summary>
+
+  <div class="keepWrap">
+    <div class="keepRule">
+      <div class="kicker">✅ 共通ルール</div>
+      <ul>
+        <li><b>明らかなゴミは残さない</b>（破損・強い汚れ/臭い・衛生的に不安なものはNG）</li>
+        <li>清潔にしてから置く（動作確認できるものは確認）</li>
+        <li><b>食品は賞味期限が1ヶ月以上</b>残っているもの</li>
+        <li><b>常温保存できないものはNG</b>（冷蔵・冷凍・生鮮は不可）</li>
+      </ul>
+      <div class="keepBadges" aria-label="要点">
+        <span class="keepBadge">🧼 清潔</span>
+        <span class="keepBadge">🔧 動作OK</span>
+        <span class="keepBadge">📅 期限1ヶ月以上</span>
+        <span class="keepBadge">🧊 冷蔵冷凍NG</span>
+      </div>
+    </div>
+
+    <!-- 日用品 -->
+    <details class="keepSection" open>
+      <summary>日用品</summary>
+      <div class="keepGrid">
+        <div class="keepBox">
+          <h4>衛生・ケア用品</h4>
+          <ul>
+            <li>洗剤（洗濯・台所・住居用）</li>
+            <li>消臭剤（リセッシュ・ファブリーズ）</li>
+            <li>ハンドソープ</li>
+          </ul>
         </div>
 
+        <div class="keepBox">
+          <h4>紙製品</h4>
+          <ul>
+            <li>トイレットペーパー</li>
+            <li>ティッシュペーパー</li>
+            <li>ウェットティッシュ</li>
+          </ul>
+        </div>
+
+        <div class="keepBox">
+          <h4>家庭用品・雑貨</h4>
+          <ul>
+            <li>キッチン用品（未使用スポンジ・ラップ・アルミホイル・ジップロック）</li>
+            <li>食器類</li>
+            <li>電気ケトル（<b>各シェアハウス1個まで</b>）</li>
+            <li>掃除用品 / ハンガー / 延長コード</li>
+            <li>蚊帳 / タオル類</li>
+            <li>大型家具（机・椅子・ベンチ・こたつなど）</li>
+            <li>マットレス（過度な汚れがないもの）</li>
+          </ul>
+        </div>
+
+        <div class="keepBox">
+          <h4>季節用具</h4>
+          <ul>
+            <li>殺虫剤</li>
+            <li>防虫剤</li>
+            <li>除湿剤</li>
+            <li>カイロ</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- 娯楽品 -->
+    <details class="keepSection">
+      <summary>娯楽品</summary>
+      <div class="keepGrid">
+        <div class="keepBox">
+          <h4>ゲーム</h4>
+          <ul>
+            <li>カードゲーム、ボードゲーム類</li>
+          </ul>
+        </div>
+        <div class="keepBox">
+          <h4>アウトドア・海・釣り</h4>
+          <ul>
+            <li>浮き輪、フィン、ゴーグル</li>
+            <li>釣り道具（ロッド、リール、ルアー等）</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- 食品 -->
+    <details class="keepSection">
+      <summary>食品（期限1ヶ月以上）</summary>
+      <p class="keepLead">※常温保存できないものはNG</p>
+      <div class="keepGrid">
+        <div class="keepBox">
+          <h4>主食系</h4>
+          <ul>
+            <li>お米（パック・生米）</li>
+            <li>乾麺（パスタ・うどん等）</li>
+            <li>パン類</li>
+          </ul>
+        </div>
+
+        <div class="keepBox">
+          <h4>即席・レトルト・缶詰</h4>
+          <ul>
+            <li>カップ麺</li>
+            <li>レトルトカレー</li>
+            <li>パスタソース / スープ</li>
+            <li>缶詰</li>
+          </ul>
+        </div>
+
+        <div class="keepBox">
+          <h4>調味料</h4>
+          <ul>
+            <li>基本調味料（砂糖・塩・酢・醤油）</li>
+            <li>酒、みりん</li>
+            <li><b>常温保存できないものはNG</b></li>
+          </ul>
+        </div>
+
+        <div class="keepBox">
+          <h4>飲料・嗜好品 / 保存がきく食材</h4>
+          <ul>
+            <li>水、お茶、お酒、コーヒー・紅茶、お菓子</li>
+            <li>乾物（海苔・わかめ等）</li>
+            <li>未開封の粉類（小麦粉・片栗粉・パン粉など）</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <div class="keepNote">※迷ったら「残さず処分」か、写真で相談。</div>
+  </div>
+</details>
+
+          <!-- ★ 埋め込みここまで -->
+        </div>
+
+        <!-- もののわ -->
         <div class="card">
           <h2>もののわ <span class="tag">不用品掲示板</span></h2>
           <p class="muted">
@@ -286,13 +490,14 @@
             <li>取引は基本「先着」か「相談」</li>
             <li>個人情報は出しすぎない（場所はぼかす等）</li>
           </ul>
+
           <div class="copyRow">
             <input class="input" id="mononowaUrl" value="https://www.facebook.com/groups/2583108038756786/" readonly />
             <button class="btn" type="button" onclick="copyText('mononowaUrl')">コピー</button>
           </div>
-          
         </div>
 
+        <!-- しゃばりば／まるど -->
         <div class="card">
           <h2>しゃばりば／まるど <span class="tag">回収・再活用</span></h2>
           <p class="muted">
@@ -312,15 +517,12 @@
       <div class="two" style="margin-top:14px;">
         <div class="card">
           <h2>現在回収できるもの</h2>
-<ul>
-  <li>衣類（洗濯済み・状態が良いもの）</li>
-  <li>小物（アクセサリー・帽子・バッグなど）</li>
-  <li>書籍（破れや強い汚れがないもの）</li>
-</ul>
-<p class="small">
-※現在は上記の品目に限定して回収しています。
-</p>
-          <p class="small"></p>
+          <ul>
+            <li>衣類（洗濯済み・状態が良いもの）</li>
+            <li>小物（アクセサリー・帽子・バッグなど）</li>
+            <li>書籍（破れや強い汚れがないもの）</li>
+          </ul>
+          <p class="small">※現在は上記の品目に限定して回収しています。</p>
         </div>
 
         <div class="card">
@@ -334,14 +536,7 @@
       </div>
     </section>
 
-    
-<div class="notice" style="margin-top:14px;">
-  <h3>📷 写真で相談（おすすめ）</h3>
-  <p class="muted">
-    「回収できるか微妙」な物は、写真を送って確認するのがいちばん早いです。
-  </p>
-</div>
-
+    <!-- FAQ -->
     <section id="faq">
       <div class="wrap">
         <h2 style="margin:0 0 10px;">よくある質問</h2>
@@ -372,6 +567,7 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
       <div class="wrap card">
         <h2>連絡・リンク</h2>
@@ -384,24 +580,19 @@
               <li>対応時間：平日8:30-17:15</li>
             </ul>
 
-              <div style="margin-top:12px; text-align:center;">
-               <p class="muted" style="margin-bottom:6px;">
-                LINE WORKS（担当者直通）
-               </p>
-                <img
-                 src="lineworks-qr.png"
-                 alt="LINE WORKS 問い合わせQRコード"
-                 style="width:160px; max-width:100%; border-radius:8px;"
-                >
-              </div>
-
+            <div style="margin-top:12px; text-align:center;">
+              <p class="muted" style="margin-bottom:6px;">LINE WORKS（担当者直通）</p>
+              <img
+                src="lineworks-qr.png"
+                alt="LINE WORKS 問い合わせQRコード"
+                style="width:160px; max-width:100%; border-radius:8px;"
+              >
+            </div>
           </div>
 
           <div class="card" style="box-shadow:none; background: rgba(11,15,20,.2);">
             <div class="kicker">フォーム</div>
-            <p class="muted" style="margin:8px 0 0;">
-              二次回収Googleフォーム
-            </p>
+            <p class="muted" style="margin:8px 0 0;">二次回収Googleフォーム</p>
             <div class="copyRow">
               <input class="input" id="formUrl" value="https://forms.gle/wcBcUhYNb8dVputo9" readonly />
               <button class="btn" type="button" onclick="copyText('formUrl')">コピー</button>
@@ -409,8 +600,7 @@
           </div>
         </div>
 
-        <p class="small" style="margin-top:12px;">
-        </p>
+        <p class="small" style="margin-top:12px;"></p>
       </div>
     </section>
   </main>
@@ -430,17 +620,31 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    function copyText(id){
+    async function copyText(id){
       const el = document.getElementById(id);
+      const value = el.value;
+
+      // 選択してコピー（フォールバック用）
+      el.focus();
       el.select();
-      el.setSelectionRange(0, 99999);
-      navigator.clipboard.writeText(el.value).then(()=>{
+      el.setSelectionRange(0, value.length);
+
+      try{
+        await navigator.clipboard.writeText(value);
         const old = el.value;
         el.value = "コピーしました！";
         setTimeout(()=>{ el.value = old; }, 900);
-      }).catch(()=>{
-        alert("コピーに失敗しました。手動で選択してコピーしてください。");
-      });
+      }catch(e){
+        // クリップボードが使えない環境向け
+        try{
+          document.execCommand("copy");
+          const old = el.value;
+          el.value = "コピーしました！";
+          setTimeout(()=>{ el.value = old; }, 900);
+        }catch(_){
+          alert("コピーに失敗しました。手動で選択してコピーしてください。");
+        }
+      }
     }
   </script>
 </body>
